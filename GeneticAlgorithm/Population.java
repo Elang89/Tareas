@@ -20,6 +20,12 @@ public class Population{
 		mutationProbability = 0.05;
 	}
 	
+	
+	/* Este metodo se utliiza para ordenar un arreglo con base 
+	 * tener las actividades que empiezan en una hora de comienzo inferior. Es decir
+	 * si una actividad empieza a las 7 y otra a las 9 entonces, la de las 7 va
+	 * primero.
+	 */
 	public int[][] sortArray(int [][] array){
 		Arrays.sort(array, new Comparator<int[]>(){
 			public int compare(int[] a, int [] b){
@@ -29,6 +35,11 @@ public class Population{
 		return array;
 	}
 	
+	/* Con este metod se generan las poblaciones, si es la primera entonces 
+	 * se llama el metodo con un true, aqui se genera una poblacion random. Sin embargo
+	 * si se toma la otra opcion, se genera una nueva poblacion basado en los individuos anteriores.
+	 * Se recicla el arreglo de la poblacion pasada y se le agrega la nueva. 
+	 */
 	public void generatePopulation(int populationSize,int chromosomeSize, boolean option){
 		chromosome = chromosomeSize;
 		if (option){
@@ -62,6 +73,9 @@ public class Population{
 		return false;
 	}
 	
+	/* Este metodo toma dos individuals, los combina basandose en un crossover point, es decir en un indice,
+	 * y forma un individuo nuevo con lo que se tomo del indice del primer individuo y el resto del segundo individuo. 
+	 */
 	public Individual crossIndividuals(ArrayList<Integer> firstIndividual, ArrayList<Integer> secondIndividual){
 		Random random = new Random();
 		int gene;
@@ -84,6 +98,10 @@ public class Population{
 		
 	}
 	
+	/* Este metodo es la funcion de seleccion. Se usa una seleccion por torneo.
+	 * En esta se utilizan 5 individuos tomados con un random. De estos 5 se toma
+	 * el que tenga mejor fitness.  
+	 */
 	public Individual selectionFunction(){
 		ArrayList<Individual> selection = new ArrayList<Individual>();
 		Random random = new Random();
@@ -99,6 +117,7 @@ public class Population{
 		return individual;
 	}
 	
+	/* Este metodo de retorna el individuo con mejor fitness en la poblacion*/
 	public Individual returnBestCandidate(){
 		Individual individual = listOfIndividuals.get(0);
 		for(int i = 0; i < listOfIndividuals.size(); i++){
